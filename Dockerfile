@@ -1,5 +1,5 @@
 # Stage 1: Build Angular App
-FROM node:18.19 AS builder
+FROM public.ecr.aws/docker/library/node:18.19 AS builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -12,7 +12,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Serve with Nginx
-FROM nginx:alpine
+FROM public.ecr.aws/docker/library/nginx:alpine
 
 # Copy Angular dist files from builder
 COPY --from=builder /app/dist/employee-rest-frontend /usr/share/nginx/html
