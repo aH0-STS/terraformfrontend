@@ -1,0 +1,49 @@
+version: 0.2
+ 
+env:
+  variables:
+    AWS_REGION: "us-east-1"
+    ECR_REPO: "522814735019.dkr.ecr.us-east-1.amazonaws.com/employeefront"
+    IMAGE_TAG: "latest"
+ 
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+      # java: corretto17
+      # docker: 20
+    commands:
+      - echo Installing Node.js and Angular CLI...
+      # - curl -sL https://rpm.nodesource.com/setup_16.x | bash -
+      # - yum install -y nodejs
+      # - npm install -g @angular/cli
+      - npm ci
+ 
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO
+ 
+  build:
+    commands:
+      - echo Building Angular project with local CLI...
+      # - npm install
+      - npx ng build --configuration production
+      - echo Building Docker image...
+      - docker build -t $ECR_REPO:$IMAGE_TAG .
+ 
+  post_build:
+    commands:
+      - echo Pushing Docker image to ECR...
+      - docker push $ECR_REPO:$IMAGE_TAG
+      - echo Updating Kubernetes manifests...
+      - mkdir -p k8s-out
+      - sed "s|IMAGE_PLACEHOLDER|$ECR_REPO:$IMAGE_TAG|g" k8s/frontend-deployment.yaml > k8s-out/deployment.yaml
+      - cp k8s/namespace.yaml k8s-out/namespace.yaml
+ 
+ 
+artifacts:
+  base-directory: k8s-out
+  files:
+    - deployment.yaml
+    - namespace.yaml

@@ -1,0 +1,19 @@
+<h2>Employee Details</h2>
+
+<p> <b>Name</b> : {{existingEmployee.empName}}</p>
+
+<p> <b>Phone Number</b> : {{existingEmployee.empPhoneNumber}}</p>
+
+<p> <b>Email</b> : {{existingEmployee.empEmail}}</p>
+
+<p> <b>Joining Date</b> : {{existingEmployee.joinDate}}</p>
+
+<p> <b>Address</b> : </p>
+
+<ul>
+    <li> <b>Street</b> : {{existingEmployee.empAddress.street}}</li>
+    <li> <b>City</b> : {{existingEmployee.empAddress.cityName}}</li>
+    <li> <b>State</b> : {{existingEmployee.empAddress.stateName}}</li>
+</ul>
+
+<button class="btn btn-primary" (click)="goToEmployeeList()">Go Back</button>

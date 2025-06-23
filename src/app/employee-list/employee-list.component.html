@@ -1,0 +1,33 @@
+<h2>Employee List</h2>
+
+<div class="table-responsive">
+
+    <table class="table table-striped table-hover">
+
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let employee of employees; let i = index">
+                <td><b>{{i+1}}</b></td>
+                <td>{{employee.empName}}</td>
+                <td>{{employee.empPhoneNumber}}</td>
+                <td>{{employee.empEmail}}</td>
+                <td>
+                    <button (click)="goToUpdateEmployee(employee.empId)" class="btn btn-info">Update</button>
+                    <button (click)="goToEmployeeDetails(employee.empId)" class="btn btn-primary" style="margin-left: 10px;">Details</button>
+                    <button (click)="deleteEmployeeById(employee.empId)" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>

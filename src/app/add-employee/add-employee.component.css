@@ -1,0 +1,20 @@
+/* form div:nth-of-type(6) {
+    display: inline-block;
+}
+
+form div:nth-of-type(7) {
+    margin-left: 57px;
+    display: inline-block;
+} */
+
+h2 {
+    margin-bottom: 1rem;
+}
+
+.d div {
+    margin: 5px 0;
+}
+
+.d {
+    margin-bottom: 1rem;
+}
