@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     AWS_REGION: "us-east-1"
-    ECR_REPO: "522814735019.dkr.ecr.us-east-1.amazonaws.com/employeefront"
+    ECR_REPO: "216989142685.dkr.ecr.us-east-1.amazonaws.com/terraformfrontend"
     IMAGE_TAG: "latest"
  
 phases:
